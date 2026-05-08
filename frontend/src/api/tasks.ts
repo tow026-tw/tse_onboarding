@@ -94,3 +94,22 @@ export async function getTask(id: string): Promise<APIResult<Task>> {
     return handleAPIError(error);
   }
 }
+
+export async function getAllTasks(): Promise<APIResult<Task[]>> {
+  try {
+    const response = await fetch("/api/tasks");
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch tasks");
+    }
+
+    const data = (await response.json()) as { tasks: TaskJSON[] };
+
+    return {
+      success: true,
+      data: data.tasks.map(parseTask),
+    };
+  } catch (error) {
+    return handleAPIError(error);
+  }
+}

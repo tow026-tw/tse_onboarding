@@ -1,0 +1,17 @@
+.container {
+  margin-top: 3rem;
+}
+
+.title {
+  font: var(--font-heading);
+}
+
+.items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.errorModalText {
+  color: var(--color-primary);
+}
