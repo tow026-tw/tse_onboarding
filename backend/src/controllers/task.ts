@@ -90,3 +90,35 @@ export const removeTask: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+type UpdateTaskBody = {
+  _id: string;
+  title: string;
+  description?: string;
+  isChecked: boolean;
+  dateCreated: string;
+};
+
+export const updateTask: RequestHandler = async (req, res, next) => {
+  const { id } = req.params;
+  const errors = validationResult(req);
+  const body = req.body as UpdateTaskBody;
+
+  try {
+    validationErrorParser(errors);
+
+    if (body._id !== id) {
+      return res.status(400).json({ error: "Request body ID does not match URL ID." });
+    }
+
+    const result = await TaskModel.findByIdAndUpdate(id, body);
+
+    if (result === null) {
+      return res.status(404).json({ error: "Task not found." });
+    }
+    const updatedTask = await TaskModel.findById(id);
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    next(error);
+  }
+};
