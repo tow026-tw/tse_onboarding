@@ -28,27 +28,24 @@ export function TaskList({ title }: TaskListProps) {
 
   return (
     <div className={styles.container}>
-
       <span className={styles.title}>{title}</span>
 
       <div className={styles.items}>
         {tasks.length === 0 ? (
           <p>No tasks yet</p>
         ) : (
-          tasks.map((task) => (
-            <TaskItem key={task._id} task={task} />
-          ))
+          tasks.map((task) => <TaskItem key={task._id} task={task} />)
         )}
       </div>
 
       {error && (
         <Dialog
-            isOpen={!!error}
-            onClose={() => setError(null)}
-            variant="error"
-            styleVersion="styled"
-            title="Error"
-            content={error ?? ""}
+          isOpen={!!error}
+          onClose={() => setError(null)}
+          variant="error"
+          styleVersion="styled"
+          title="Error"
+          content={error ?? ""}
         />
       )}
     </div>

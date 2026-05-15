@@ -42,7 +42,6 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
         disabled={isLoading}
       />
 
-
       <div
         className={
           task.isChecked ? `${styles.textContainer} ${styles.checked}` : styles.textContainer

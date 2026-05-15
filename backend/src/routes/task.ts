@@ -23,5 +23,3 @@ router.put("/:id", TaskValidator.updateTask, TaskController.updateTask);
 router.delete("/:id", TaskController.removeTask);
 
 export default router;
-
-
